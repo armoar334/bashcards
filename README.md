@@ -14,5 +14,6 @@ the file is read line by line, so must be in the format
 
 and so on  
 ### keybinds
-Down/Right arrow to go to next 
-Up/Left arrow to previous
+Down/Right arrow to go to next  
+Up/Left arrow to previous  
+q to quit
