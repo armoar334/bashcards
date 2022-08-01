@@ -2,6 +2,7 @@
 TUI flashcards, in bash
 
 ## Usage
+### files
 >  ./cards.sh [file]  
 >  
 the file is read line by line, so must be in the format  
@@ -12,3 +13,6 @@ the file is read line by line, so must be in the format
 > Answer 2  
 
 and so on  
+### keybinds
+Down/Right arrow to go to next 
+Up/Left arrow to previous
