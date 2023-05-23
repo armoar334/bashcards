@@ -66,6 +66,7 @@ PRINT_NUMBER() {
 
 SETUP_BCTF() {
 	FILELINES=$(wc -l $FILENAME | cut -d ' ' -f1)
+	readarray -t BCTF < "$FILENAME"
 }
 
 DRAW_QUESTION() {
@@ -73,7 +74,7 @@ DRAW_QUESTION() {
 	HALF_COLUMN=$(($COLUMNS / 2))
 	printf '\e['$HALF_LINE';'$HALF_COLUMN'H'
 	printf '\e[2K'
-	QUES_TEXT=$(cat "$FILENAME" | sed -n "$CURRENT_OPTION"p "$FILENAME" )
+	QUES_TEXT="${BCTF[CURRENT_OPTION]}"
 	printf '\e['$(( ${#QUES_TEXT} / 2))'D'
 	echo $QUES_TEXT
 }
@@ -108,8 +109,7 @@ INPUT() {
 		'[B') Q_INCREASE ;;
 		'[D') Q_DECREASE ;;
 		'[C') Q_INCREASE ;;
-		'q') RESTORE_TERM && exit ;;
-		*) echo 'brokey' ;;
+		'q'|'Q') RESTORE_TERM && exit ;;
 	esac
 }
 
@@ -137,7 +137,9 @@ SETUP_BCTF
 SETUP_UI
 while true
 do
+	echo -n "$(
 	PRINT_NUMBER
 	DRAW_QUESTION
+	)"
 	INPUT
 done
