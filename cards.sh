@@ -1,4 +1,4 @@
-!/bin/env bash
+#!/bin/env bash
 #
 #BashCards, a flashcard app in pure bash
 #
@@ -58,7 +58,7 @@ PRINT_FILE() {
 
 PRINT_NUMBER() {
 #Number, bottom, right
-	NUMBERS="$CURRENT_OPTION"/"$FILELINES"
+	NUMBERS="$(( CURRENT_OPTION + 1 ))/$FILELINES"
 	printf '\e['$LINES';'$COLUMNS'H'
 	printf '\e['${#NUMBERS}'D'
 	printf "$NUMBERS"
@@ -87,11 +87,11 @@ Q_INCREASE() {
 }
 
 Q_DECREASE() {
-	if [[ $CURRENT_OPTION -le 1 ]]
+	if [[ $CURRENT_OPTION -le 0 ]]
 	then
-		CURRENT_OPTION=1
+		CURRENT_OPTION=0
 	fi
-	if [[ $CURRENT_OPTION -gt 1 ]]
+	if [[ $CURRENT_OPTION -gt 0 ]]
 	then
 		((CURRENT_OPTION=CURRENT_OPTION-1))
 	fi
@@ -120,7 +120,7 @@ INPUT() {
 
 #startup variables
 FILENAME=$1
-CURRENT_OPTION=1
+CURRENT_OPTION=0
 QUESTION=true
 
 if [[ $FILENAME == "" ]];
